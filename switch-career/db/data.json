@@ -1,0 +1,22 @@
+{
+    "users": [{
+        "name": "Daniel",
+        "summary": "My journey from an accountant to a software engineer",
+        "story": "orem, ipsum dolor sit amet consectetur adipisicing elit. Numquam consectetur libero quas doloremque accusantium voluptas nihil consequuntur id sapiente iure aperiam, harum eligendi placeat laboriosam atque et, saepe non obcaecati?",
+        "profile-pic": "../src/assets/background-image.jpg"
+    },
+
+    {
+        "name": "Andrew",
+        "summary": "My journey from an accountant to a software engineer",
+        "story": "orem, ipsum dolor sit amet consectetur adipisicing elit. Numquam consectetur libero quas doloremque accusantium voluptas nihil consequuntur id sapiente iure aperiam, harum eligendi placeat laboriosam atque et, saepe non obcaecati?",
+        "profile-pic": "../src/assets/background-image.jpg"
+    },
+
+    {
+        "name": "Kevin",
+        "summary": "My journey from an accountant to a software engineer",
+        "story": "orem, ipsum dolor sit amet consectetur adipisicing elit. Numquam consectetur libero quas doloremque accusantium voluptas nihil consequuntur id sapiente iure aperiam, harum eligendi placeat laboriosam atque et, saepe non obcaecati?",
+        "profile-pic": "../src/assets/background-image.jpg"
+    }]
+}
