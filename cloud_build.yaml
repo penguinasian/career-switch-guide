@@ -1,0 +1,12 @@
+steps:
+#Create .env file from Google Cloud Build substitution variables
+- name: node
+  entrypoint: npm
+  args: ["run", "create-env"]
+  env:
+    - 'MONGO_URL=${_MONGO_URL}'
+    - 'JWT_SECRET=${_JWT_SECRET}'
+#The .env file is prepared and ready to deploy to Google App Engine
+- name: "gcr.io/cloud-builders/gcloud"
+  args: ["app", "deploy"]
+timeout: "1600s"
