@@ -18,6 +18,7 @@
         <router-link :to="{ name: 'blogs' }" v-if="userEmail"
           ><button class="btn-primary">Read stories</button></router-link
         >
+        
       </div>
       <div class="hero-right">
         <img :src="imgUrl" />
