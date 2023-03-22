@@ -1,252 +1,167 @@
 <template>
-  <Navbar />
+  <Navbar :isLoggedIn="isLoggedIn" />
+
+  <div class="hero">
+    <h2>Hi, {{ userName }}</h2>
+    <p>
+      Thanks for stopping by to share your valuble experience.
+    </p>
+  </div>
+
   <form class="blog-form" @submit.prevent="handleSubmit">
-    <h2>We are excited to hear about your story and cannot wait to share it with the community!</h2>
-    
     <div class="edu-exp">
-      <div class="education">
-        <div>
-          <label>Education: </label>
-          <select v-model="educationType">
-            <option value="education" selected>Education</option>
-            <option value="accounting">PhD</option>
-            <option value="nursing">Masters</option>
-            <option value="financial-analyst">Bachelor</option>
-            <option value="diploma">Diploma</option>
-          </select>
-        </div>
-        <div>
-          <label>School: </label>
-          <select v-model="school">
-            <option value="school" selected>School</option>
-            <option value="bcit">BCIT</option>
-            <option value="sfu">SFU</option>
-            <option value="ubc">UBC</option>
-            <option value="langara">Langara</option>
-            <option value="douglas">Douglas</option>
-          </select>
-        </div>
-        <div>
-          <label>Program: </label>
-          <select v-model="program">
-            <option value="program" selected>Program</option>
-            <option value="accounting">Accounting</option>
-            <option value="nursing">Nursing</option>
-            <option value="finance">Finance</option>
-            <option value="cook">Cooking</option>
-          </select>
-        </div>
-
-        <div class="add-more">+</div>
-      </div>
-
-      <!-- work experience -->
-      <div class="work-experience">
-        <div>
-          <label>Work Experience: </label>
-          <select v-model="industry">
-            <option value="industry" selected>Industry</option>
-            <option value="accounting">Accounting</option>
-            <option value="nursing">Nursing</option>
-            <option value="finance">Finance</option>
-            <option value="cook">Cook</option>
-          </select>
-        </div>
-        <div>
-          <label>Company: </label>
-          <select v-model="company">
-            <option value="company" selected>Company</option>
-            <option value="google">Google</option>
-            <option value="facebook">Facebook</option>
-            <option value="microsoft">Mircosoft</option>
-            <option value="Netflix">Netflix</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
-        <div>
-          <label>Job Title: </label>
-          <select v-model="title">
-            <option value="title" selected>title</option>
-            <option value="frontend">Front-end developer</option>
-            <option value="backend">Back-end developer</option>
-            <option value="financial-analyst">Financial analyst</option>
-            <option value="fullstack">Full Stack developer</option>
-            <option value="tech-lead">Tech lead</option>
-          </select>
-        </div>
-
-        <div class="add-more">+</div>
-      </div>
-
-      <h2>Find the questions below you would like to answer</h2>
-      <input type="text" placeholder="Search">
       <div class="individual-question">
         <div class="question-title" style="padding: 30px">
           <label>What industry are you currently in?</label>
-          <span>delete</span>
         </div>
 
-        <textarea cols="100" rows="10" v-model="curIndustry"></textarea>
+        <select v-model="curIndustry">
+          <option value="software engineering" selected>Software engineering</option>
+          <option value="accounting">Accounting</option>
+          <option value="nursing">Nursing</option>
+          <option value="banking">Banking</option>
+          <option value="finance">Finance</option>
+          <option value="sales">Sales</option>
+          <option value="marketing">Marketing</option>
+          <option value="cook">Cook</option>
+        </select>
       </div>
       <div class="individual-question">
         <div class="question-title" style="padding: 30px">
-          <label>What industry are you looking to switch to?</label
-          ><span>delete</span>
+          <label>What was your previous industry?</label>
         </div>
 
-        <textarea cols="100" rows="10" v-model="preIndustry"></textarea>
-      </div>
-
-      <div class="individual-question">
-        <div class="question-title" style="padding: 30px">
-          <label>What prompted you to change your career?</label>
-          <span>delete</span>
-        </div>
-
-        <textarea cols="100" rows="10" v-model="reasons"></textarea>
-      </div>
-      <div class="individual-question">
-        <div class="question-title" style="padding: 30px">
-          <label
-            >What were the obstacles when it came to changing your
-            career?</label
-          >
-          <span>delete</span>
-        </div>
-
-        <textarea cols="100" rows="10" v-model="obstacles"></textarea>
+        <select v-model="preIndustry">
+          <option value="software engineering" selected>Software engineering</option>
+          <option value="accounting">Accounting</option>
+          <option value="nursing">Nursing</option>
+          <option value="banking">Banking</option>
+          <option value="finance">Finance</option>
+          <option value="sales">Sales</option>
+          <option value="marketing">Marketing</option>
+          <option value="cook">Cook</option>
+        </select>
       </div>
       <div class="individual-question">
         <div class="question-title" style="padding: 30px">
-          <label
-            >What was your experience like in the new school program you
-            swtiched into?</label
-          >
-          <span><p>delete</p></span>
+          <label>Your story/experience goes here </label>
+          <span @click="toggleHelpModal">Help</span>
         </div>
-
-        <textarea cols="100" rows="10" v-model="schoolExperience"></textarea>
-      </div>
-      <div class="individual-question">
-        <div class="question-title" style="padding: 30px">
-          <label>How has your work experience been in your new career?</label>
-          <span>delete</span>
-        </div>
-
-        <textarea cols="100" rows="10" v-model="newWorkExperience"></textarea>
-      </div>
-      <div class="individual-question">
-        <div class="question-title" style="padding: 30px">
-          <label>More advice to share, please type in here</label>
-          <span><p>delete</p></span>
-        </div>
-
-        <textarea cols="100" rows="10" v-model="moreAdvice"></textarea>
+        <textarea
+          cols="100"
+          rows="45"
+          v-model="blog"
+          placeholder="Not sure what exactly to write down? Do not worry, click the help button, it may give you some help"
+        ></textarea>
       </div>
     </div>
-    <!-- <h2>
-      Next, choose the questions you would like to answer, which you think may
-      be helpful to career switchers
-    </h2> -->
 
-    <button class="btn-primary" @click="handleNext">Submit</button>
+    <button v-if="!isSharing" class="btn-primary">Submit</button>
+    <button v-if="isSharing" class="btn-primary" disabled>Sharing</button>
   </form>
+  <div v-if="showHelpModal" class="modal">
+    <div class="modal-container">
+      <span @click="closeShowHelpModal">X</span>
+      <Help />
+    </div>
+  </div>
   <Footer />
 </template>
 
 <script>
 import Navbar from "../components/Navbar.vue";
 import Footer from "../components/Footer.vue";
+import Help from "../components/Help.vue";
+import { useRouter } from "vue-router";
 
 import { ref } from "vue";
+import useRequireAuth from "../composables/useRequireAuth.js";
 export default {
   name: "BlogForm",
-  components: { Navbar, Footer },
+  components: { Navbar, Footer, Help },
   setup(props) {
-    const educationType = ref("education");
-    const school = ref("school");
-    const program = ref("program");
-    const industry = ref("industry");
-    const company = ref("company");
-    const title = ref("title");
-    const curIndustry = ref("")
-    const preIndustry = ref("")
-    const reasons = ref("")
-    const schoolExperience = ref("")
-    const newWorkExperience = ref("")
-    const moreAdvice = ref("")
-    const obstacles = ref("")
+    const curIndustry = ref("accounting");
+    const preIndustry = ref("software engineering");
+    const blog = ref("");
+    const showHelpModal = ref(false);
+    const isSharing = ref(false)
+    const router = useRouter()
 
-    const handleNext = (e) => {
-      e.preventDefault();
-      console.log("Education type: ", educationType.value);
-      console.log("School: ", school.value);
-      console.log("Program: ", program.value);
-      console.log("Industry: ", industry.value);
-      console.log("Company: ", company.value);
-      console.log("Title: ", title.value);
+    const userEmail = localStorage.getItem("email");
+    const jwttoken = localStorage.getItem("jwttoken");
+    const { requireAuth, isLoggedIn, userName } = useRequireAuth(userEmail);
+    console.log(isLoggedIn.value);
+
+    requireAuth(userEmail);
+
+    const toggleHelpModal = () => {
+      showHelpModal.value = !showHelpModal.value;
     };
 
-    const handleSubmit = async () => {
+    const closeShowHelpModal = () => {
+      showHelpModal.value = !showHelpModal.value
+    }
 
+    const handleSubmit = async () => {
       const blogData = {
         curIndustry: curIndustry.value,
         preIndustry: preIndustry.value,
-        reasons: reasons.value,
-        schoolExperience: schoolExperience.value,
-        newWorkExperience: newWorkExperience.value,
-        moreAdvice: moreAdvice.value,
-        obstacles: obstacles.value,
-        user: "Andrew"
+        blog: blog.value,
+        user: userName.value,
+        userEmail: userEmail
+      };
+
+      try {
+        isSharing.value = true
+        const response = await fetch("http://localhost:3000/api/v1/blog/post", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: "Bearer " + jwttoken,
+          },
+          body: JSON.stringify(blogData),
+        });
+
+        const data = await response.json();
+        console.log(data);
+        isSharing.value = false
+        router.push({name: "blogs"})
+      } catch (error) {
+        console.error(error.message);
       }
-
-        try {
-          
-          const response = await fetch("http://localhost:3000/api/v1/blog/post", {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(blogData)
-          })
-
-          const data = await response.json()
-          console.log(data)
-
-        } catch (error) {
-          
-          console.error(error.message)
-        }
-    }
+    };
 
     return {
-      educationType,
-      school,
-      program,
-      industry,
-      company,
-      title,
+      blog,
       curIndustry,
       preIndustry,
-      reasons,
-      schoolExperience,
-      newWorkExperience,
-      moreAdvice,
-      obstacles,
-      handleSubmit
+      handleSubmit,
+      isLoggedIn,
+      requireAuth,
+      userName,
+      toggleHelpModal,
+      showHelpModal,
+      closeShowHelpModal,
+      isSharing
     };
   },
 };
 </script>
 
 <style scoped>
+.hero {
+  flex-direction: column;
+  height: 100px;
+  margin-top: 100px;
+  margin-bottom: 20px;
+}
 .blog-form {
   max-width: 1200px;
   /* background: rgba(0, 0, 0, 0.05); */
   /* box-shadow: 5px 10px 12px #acabab; */
 
   margin: auto;
-  margin-top: 150px;
+  /* margin-top: 150px; */
   margin-bottom: 70px;
   border-radius: 6px;
   padding: 20px;
@@ -265,7 +180,6 @@ input {
   height: 30px;
   border-radius: 6px;
   outline: none;
-  
 }
 
 input:focus {
@@ -306,7 +220,7 @@ input:focus {
 }
 
 .btn-primary {
-  margin-top: 20px;
+  
   width: 100px;
 }
 
@@ -316,7 +230,7 @@ input:focus {
   align-items: flex-start;
   gap: 5px;
   margin-bottom: 50px;
-  background: #4E6E81;
+  background: #4e6e81;
   /* background: rgba(0, 0, 0, 0.05); */
   box-shadow: 5px 10px 12px #acabab;
   border-radius: 8px;
@@ -343,4 +257,15 @@ textarea {
   background: lightgray;
   width: 882px;
 }
+
+select {
+  width: 100%;
+  height: 50px;
+}
+
+.modal-container {
+    height: 450px;
+  }
+
+
 </style>

@@ -30,8 +30,11 @@ export default {
 .footer {
   display: flex;
   flex-direction: column;
+  margin-top: 50px;
+  bottom: 0;
   margin-bottom: 20px;
-  
+  align-items: center;
+  width: 100%;
 }
 
 .footer-text {

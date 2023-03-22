@@ -1,7 +1,8 @@
 <template>
   <div class="auth">
+    <h1>Career Switch Guide</h1>
     <form @submit.prevent="handleSubmit">
-      <h3>Log in</h3>
+      <h2>Log in</h2>
       <div class="input-field">
         <label>Email</label>
         <input type="text" v-model="email" required />
@@ -17,11 +18,11 @@
      
       <div style="display: flex; align-items: center; flex-direction: column">
         <!-- <p v-if="errorMessage.length > 0" class="error"> {{ errorMessage }}</p> -->
-        <p>Not a member yet? <a @click="toggleLoginModal">Sign up</a></p>
+        <p>Not a member yet? <router-link to='/signup'>Sign up</router-link></p>
         <button class="btn-primary">Log in</button>
       </div>
       <div class="line">or</div>
-      <button class="btn-primary">Log in with Google</button>
+      <button class="btn-primary" @click="loginUser">Log in with Google</button>
       
     </form>
   </div>
@@ -29,18 +30,25 @@
 
 <script>
 import { ref } from "vue";
+import { useRouter, useRoute } from 'vue-router';
+
 export default {
   name: "Login",
-  emits: ["switchLoginModal"],
+  emits: ["switchLoginModal", "userLogin"],
   setup(props, ctx) {
 
     const email = ref('')
     const password = ref('')
     const error = ref(null)
+    const router = useRouter()
 
     const toggleLoginModal = () => {
       ctx.emit("switchLoginModal");
     };
+
+    const loginUser = () => {
+      ctx.emit("userLogin")
+    }
 
     const handleSubmit = async () => {
       console.log(email.value, password.value);
@@ -60,13 +68,15 @@ export default {
             body: JSON.stringify(userData),
           }
         );
+        const loginResponse = await response.json();
         console.log(response.ok)
         if (!response.ok) {
-            throw Error('Incorrect credentials!')
+            throw Error(loginResponse.message)
         }
         error.value = null
-        const signupResponse = await response.json();
-        console.log(signupResponse.email, signupResponse.jwttoken);
+        localStorage.setItem('jwttoken', loginResponse.jwttoken)
+        localStorage.setItem('email', loginResponse.email)
+        router.push({name: 'blogs'})
         
       } catch (err) {
         error.value = err.message
@@ -76,24 +86,33 @@ export default {
       }
     };
 
-    return { toggleLoginModal, handleSubmit, email, password, error };
+    return { toggleLoginModal, handleSubmit, email, password, error, loginUser };
   },
 };
 </script>
 
 <style scoped>
+h1 {
+  margin-top: 100px;
+}
 form {
+  
   display: flex;
   flex-direction: column;
   gap: 20px;
   width: 70%;
   margin: auto;
+  background: rgba(0, 0, 0, 0.08);
+  padding: 30px;
+  margin-top: 100px;
+  border-radius: 10px;
+  box-shadow: 5px 10px 12px #acabab;
 }
 
 .input-field {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 70%;
 }
 
 label {

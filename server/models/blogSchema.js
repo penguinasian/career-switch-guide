@@ -6,12 +6,10 @@ const blogSchema = new Schema({
 
     curIndustry: String,
     preIndustry: String,
-    reasons: String,
-    obstacles: String,
-    schoolExperience: String,
-    newWorkExperience: String,
-    moreAdvice: String,
+    blog: String,
+    user: String,
     // postedBy: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+    userEmail: String,
     postedBy: String
 
 })

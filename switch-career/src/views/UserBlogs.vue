@@ -1,46 +1,64 @@
 <template>
-  <Navbar />
+  <Navbar :isLoggedIn="isLoggedIn" />
   <div class="hero">
     <div class="hero-left">
-      <h1>Hi, UserName</h1>
+      <h1>Hi, {{ userName }}</h1>
       <p>
         We hope you will be inspired by the career switching stories shared by
-        the community memebers! Filter the blogs based on your own career interests or
-        click the create button to create and share your experience.
+        the community memebers! Filter the blogs based on your own career
+        interests or click the create button to create and share your
+        experience.
       </p>
-      <button class="btn-primary">Create</button>
+      <router-link to="/blog-form"
+        ><button class="btn-primary">Create</button></router-link
+      >
     </div>
     <div class="hero-right">
-      
       <form>
-        <div>
+        <!-- <div>
           <label>Current Industry: </label>
-          <select id="current-industry" name="current-industry">
+          <select v-model="curIndustry">
+            <option value="all" selected>
+              All
+            </option>
+            <option value="software engineering">
+              Software engineering
+            </option>
             <option value="accounting">Accounting</option>
             <option value="nursing">Nursing</option>
-            <option value="financial-analyst">Finacial Analyst</option>
+            <option value="banking">Banking</option>
+            <option value="finance">Finance</option>
+            <option value="sales">Sales</option>
+            <option value="marketing">Marketing</option>
+            <option value="cook">Cook</option>
+          </select>
+        </div> -->
+
+        <div>
+          <label>Filter by your desired industry: </label>
+          <select v-model="desiredIndustry">
+            <option value="all" selected>
+              All
+            </option>
+            <option value="software engineering">
+              Software engineering
+            </option>
+            <option value="accounting">Accounting</option>
+            <option value="nursing">Nursing</option>
+            <option value="banking">Banking</option>
+            <option value="finance">Finance</option>
+            <option value="sales">Sales</option>
+            <option value="marketing">Marketing</option>
             <option value="cook">Cook</option>
           </select>
         </div>
-
-        <div>
-          <label>New Industry: </label>
-          <select id="current-industry" name="current-industry">
-            <option value="accounting">Accounting</option>
-            <option value="nursing">Nursing</option>
-            <option value="financial-analyst">Finacial Analyst</option>
-            <option value="cook">Software Engineering</option>
-          </select>
-        </div>
-
-        <button class="btn-primary">Filter</button>
       </form>
     </div>
   </div>
   <div class="user-stories">
-    <div v-if="userBlogs.length > 0" class="user-stories">
+    <div v-if="filteredBlogs.length > 0" class="user-stories">
       <div
-        v-for="userBlog in userBlogs"
+        v-for="userBlog in filteredBlogs"
         :key="userBlog.name"
         class="user-story"
       >
@@ -48,24 +66,49 @@
       </div>
     </div>
   </div>
+  <Footer />
 </template>
 
 <script>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import UserBlogCard from "../components/UserBlogCard.vue";
 import Navbar from "../components/Navbar.vue";
+import { useRouter } from "vue-router";
+import useRequireAuth from "../composables/useRequireAuth.js";
+import Footer from "../components/Footer.vue";
 
 export default {
   name: "UserBlogs",
-  components: { UserBlogCard, Navbar },
+  components: { UserBlogCard, Navbar, Footer },
   setup() {
     const userBlogs = ref([]);
+    
     const error = ref(null);
+    const desiredIndustry = ref("all")
+    const curIndustry = ref("all")
+    const usertoken = ref(localStorage.getItem("jwttoken"));
+    const userEmail = localStorage.getItem("email");
+    console.log(userEmail);
+    console.log(usertoken);
+    const router = useRouter();
+
+    const { requireAuth, isLoggedIn, userName } = useRequireAuth(userEmail);
+    console.log(isLoggedIn.value);
+
+    requireAuth(userEmail);
 
     const loadUserBlogs = async () => {
       try {
-        const data = await fetch("http://localhost:3000/api/v1/blog/posts");
+        const data = await fetch("http://localhost:3000/api/v1/blog/posts", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("jwttoken"),
+          },
+        });
+        console.log(data);
         if (!data.ok) {
+          router.push("/");
           throw Error("no data available!");
         }
         userBlogs.value = await data.json();
@@ -78,20 +121,34 @@ export default {
 
     loadUserBlogs();
 
-    return { userBlogs, error };
+    
+
+    const filteredBlogs = computed(() => {
+
+          if ( desiredIndustry.value === "all") {
+            return userBlogs.value
+          }
+
+         return userBlogs.value.filter((userBlog) => userBlog.curIndustry === desiredIndustry.value)
+    })
+
+    // const handleFilter = () => {
+      
+     
+
+    //      return userBlogs.value.filter((userBlog) => userBlog.curIndustry === newIndustry.value && userBlog.preIndustry === curIndustry.value)
+     
+
+     
+    // }
+
+    return { userBlogs, error, usertoken, isLoggedIn, requireAuth, userName, desiredIndustry, curIndustry, filteredBlogs };
   },
 };
 </script>
 
 <style scoped>
-.user-stories {
- 
-  display: flex;
- 
-  flex-direction: column;
-  gap: 50px;
-  margin: auto;
-}
+
 
 /* .user-story:nth-child(even) > .user-story-card {
   flex-direction: row-reverse !important;
@@ -103,21 +160,9 @@ export default {
   align-items: center;
 }
 
-.user-blog-card {
-    width: 1200px;
-    margin: auto;
-    padding: 15px;
-   
-    border-radius: 10px;
-    /* height: 85px; */
-    box-shadow: 5px 10px 12px #acabab;
-    display: flex;
-    /* flex-direction: column; */
-    justify-content: space-between;
-    align-items: center;
-    /* background-image: linear-gradient(#0093AB, #D9D9D9); */
-    /* background: #5b7c99; */
-    background: rgba(0, 0, 0, 0.08);
-    border: none
+.hero-left p {
+  text-align: start;
 }
+
+
 </style>

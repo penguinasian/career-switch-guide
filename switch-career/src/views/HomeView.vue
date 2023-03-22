@@ -1,23 +1,28 @@
 <template>
-  <Navbar @toggleLogin="toggleClick" />
+  <Navbar @toggleLogin="toggleClick" :isLoggedIn="isLoggedIn" />
   <div class="home">
     <div class="hero">
       <div class="hero-left">
         <h1>Your Best Career Switching Guide</h1>
         <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Numquam
-          consectetur libero quas doloremque accusantium voluptas nihil
-          consequuntur id sapiente iure aperiam, harum eligendi placeat
-          laboriosam atque et, saepe non obcaecati?
+          Considering switching to a different career, but not sure where to
+          start? Do not worry, Switch Career is here to help. Join the community
+          and read the stories/experiences shared by the community members.
         </p>
-        <router-link :to="{ name: 'blog-form' }"
+        <router-link :to="{ name: 'signup' }" v-if="!userEmail"
           ><button class="btn-primary">Get started</button></router-link
+        >
+        <router-link :to="{ name: 'blog-form' }" v-if="userEmail"
+          ><button class="btn-primary">Share your story</button></router-link
+        >
+        <router-link :to="{ name: 'blogs' }" v-if="userEmail"
+          ><button class="btn-primary">Read stories</button></router-link
         >
       </div>
       <div class="hero-right">
         <img :src="imgUrl" />
       </div>
-      <!-- <UserStories /> -->
+    
     </div>
 
     <div v-if="logInClicked" class="loginModal">
@@ -34,18 +39,17 @@
       </div>
     </div>
 
-    
+    <div class="bottom-section">
       <h2>How Switch Career works</h2>
-      <p style="text-align:center; margin-bottom: 50px;">
+      <p style="text-align: center; margin-bottom: 50px">
         Register and log in to read all the careering swtiching stories shared
         by members. Find your inspiration and motivation. Feel free to share
         your own experiences too!
       </p>
-   
+    </div>
 
-    <div class="middle-section">
+    <div class="website-guide-section">
       <div class="website-guide">
-        
         <img src="../assets/signup.png" alt="signup" />
         <h3>Sign up</h3>
         <p>Register an account and be a part of the community</p>
@@ -57,7 +61,6 @@
           Once you have logged in, you will be able to browse and read all the
           blogs shared by our members about their career switching stories.
         </p>
-        <button class="btn-primary" style="width: 100px">Join</button>
       </div>
       <div class="website-guide">
         <img src="../assets/sharing.png" alt="sharing" />
@@ -68,26 +71,28 @@
         </p>
       </div>
     </div>
-    
   </div>
   <Footer />
 </template>
 
 <script>
 import Navbar from "../components/Navbar.vue";
-import UserStories from "../components/UserStories.vue";
+
 import Footer from "../components/Footer.vue";
 import Login from "../components/Login.vue";
 import Signup from "../components/Signup.vue";
 import { ref } from "vue";
+import useRequireAuth from "../composables/useRequireAuth.js";
+import { useRouter } from "vue-router";
 
 export default {
   name: "home",
-  components: { Navbar, UserStories, Footer, Login, Signup },
+  components: { Navbar, Footer, Login, Signup },
   setup() {
     const logInClicked = ref(false);
     const isSignUp = ref(false);
     const imgUrl = ref(require("../assets/door.jpg"));
+    const router = useRouter();
 
     const toggleClick = () => {
       logInClicked.value = !logInClicked.value;
@@ -110,6 +115,17 @@ export default {
     const closeSignUpModal = () => {
       isSignUp.value = !isSignUp;
     };
+
+    const userEmail = localStorage.getItem("email");
+    console.log(userEmail);
+
+    const { isLoggedIn, requireAuth } = useRequireAuth(userEmail);
+
+    if (isLoggedIn.value) {
+      router.push({ name: "blogs" });
+    }
+    requireAuth(userEmail);
+    console.log(isLoggedIn.value);
     return {
       logInClicked,
       toggleClick,
@@ -119,6 +135,9 @@ export default {
       isSignUp,
       closeSignUpModal,
       imgUrl,
+      isLoggedIn,
+      requireAuth,
+      userEmail,
     };
   },
 };
@@ -130,6 +149,7 @@ export default {
   margin: auto;
   margin-top: 50px;
   margin-bottom: 70px;
+  padding: 50px;
 }
 
 img {
@@ -179,7 +199,7 @@ span:hover {
 }
 
 .hero {
-  width: 1200px;
+  max-width: 1600px;
   /* margin: auto; */
   display: flex;
   justify-content: space-between;
@@ -198,6 +218,7 @@ span:hover {
   width: 500px;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .hero-left h1,
@@ -233,18 +254,223 @@ form {
   flex-direction: column;
   justify-content: center;
   align-items: center;
- 
 }
 
-.middle-section {
+.website-guide-section {
   display: flex;
   justify-content: space-around;
-  align-items: flex-start;
 }
 
-.middle-section p {
+.website-guide-section p {
   text-align: center;
 }
 
+@media only screen and (max-width: 480px) {
+  .nav-bar {
+    max-width: 350px;
+    min-width: 250px;
+    justify-content: center;
+  }
 
+  .home {
+    max-width: 400px;
+    min-width: 350px;
+  }
+
+  .hero {
+    max-width: 350px;
+    min-width: 300px;
+  }
+
+  .hero-left {
+    width: 150px;
+    margin-right: 20px;
+  }
+
+  /* .hero-right {
+    width: 150px;
+  } */
+
+  img {
+    width: 130px;
+    height: 200px;
+  }
+
+  p {
+    width: 160px;
+    font-size: 12px;
+  }
+
+  h1 {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  .nav-bar {
+    max-width: 350px;
+    min-width: 250px;
+    justify-content: center;
+  }
+
+  .home {
+    max-width: 400px;
+    min-width: 350px;
+  }
+
+  .hero {
+    max-width: 350px;
+    min-width: 300px;
+  }
+
+  .hero-left {
+    width: 150px;
+    margin-right: 20px;
+  }
+
+  /* .hero-right {
+    width: 150px;
+  } */
+
+  img {
+    width: 130px;
+    height: 200px;
+  }
+
+  p {
+    width: 160px;
+    font-size: 12px;
+  }
+
+  h1 {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .nav-bar {
+    max-width: 400px;
+    min-width: 350px;
+  }
+
+  .home {
+    max-width: 500px;
+    min-width: 350px;
+  }
+
+  .hero {
+    max-width: 500px;
+    min-width: 350px;
+  }
+
+  img {
+    width: 130px;
+    height: 200px;
+  }
+
+  p {
+    width: 160px;
+    font-size: 12px;
+  }
+
+  h1 {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (min-width: 576px) {
+  .home {
+    max-width: 800px;
+    min-width: 600px;
+  }
+
+  .hero {
+    max-width: 800px;
+    min-width: 600px;
+  }
+
+  img {
+    width: 150px;
+    height: 220px;
+  }
+
+  p {
+    width: 200px;
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 18px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .home {
+    max-width: 1000px;
+    min-width: 800px;
+  }
+
+  .hero {
+    max-width: 1000px;
+    min-width: 800px;
+  }
+  img {
+    width: 180px;
+    height: 250px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  p {
+    width: 250px;
+    font-size: 16px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .home {
+    max-width: 1200px;
+    min-width: 1000px;
+  }
+
+  .hero {
+    max-width: 1200px;
+    min-width: 1000px;
+  }
+
+  img {
+    width: 220px;
+    height: 290px;
+  }
+  h1 {
+    font-size: 25px;
+  }
+
+  p {
+    width: 300px;
+    font-size: 16px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .home {
+    max-width: 1500px;
+    min-width: 1300px;
+  }
+
+  img {
+    width: 250px;
+    height: 300px;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+  p {
+    width: 350px;
+    font-size: 16px;
+  }
+}
 </style>
