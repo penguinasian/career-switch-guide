@@ -178,293 +178,16 @@ input {
     align-items: center;
   }
 
-  @media only screen and (max-width: 480px) {
-   
-  
-    .hero {
-      max-width: 350px;
-      min-width: 300px;
-      
-    }
-  
-    .hero-left {
-      width: 160px;
-      margin-right: 20px;
-    }
-
-    .hero-right {
-      width: 140px;
-    }
-
-    .individual-blog p  {
-     
-      font-size: 12px;
-    }
-
-    h2 {
-      font-size: 16px;
-    }
-
-    .blog-content textarea {
-      width: 400px;
-    }
-  }
-
-  @media only screen and (min-width: 480px) {
-
-  
-    .hero {
-      max-width: 350px;
-      min-width: 300px;
-      
-    }
-  
-    .hero-left {
-      width: 200px;
-      margin-right: 20px;
-    }
-
-    .individual-blog p  {
-     
-      font-size: 12px;
-    }
-
-    .footer p {
-      font-size: 12px;
-    }
-    
-    .footer-text {
-      flex-direction: column;
-    }
-  
-    .hero-right {
-      width: 200px;
-    }
-
-    .blog-content textarea {
-      width: 400px;
-    }
-  
-  
-  }
-
-  @media only screen and (max-width: 576px) {
+  /* media queries */
 
 
-   
-    .hero p, .bottom-section p  {
-      width: 160px;
-      font-size: 12px;
+  @media screen and (max-width: 540px) {
+
+    .hero h1 {
+      width: 500px;
     }
 
-    .footer p {
-      font-size: 12px;
-    }
-
-    .individual-blog p  {
-     
-      font-size: 14px;
-    }
-
-    label {
-      font-size: 12px;
-    }
-
-    a {
-      font-size: 12px;
-    }
-  
      h1 {
-      font-size: 16px;
-    }
-
-    h2 {
-      font-size: 14px;
-    }
-
-    h3 {
-      font-size: 14px;
-    }
-
-    .hero {
-      max-width: 500px;
-      min-width: 350px;
-      
-    }
-  
-
-    .hero-right {
-      margin: auto;
-    }
-
-    .hero-right {
-      width: 220px;
-    }
-
-    .hero-left {
-      width: 220px;
-    }
-
-    .btn-primary {
-      font-size: 12px;
-    }
-
-    .website-guide-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .user-blog-card {
-      width: 280px;
-      flex-direction: column;
-    }
-  }
-  
-  @media only screen and (min-width: 576px) {
-  
-    .hero p, .bottom-section p  {
-      width: 200px;
-      font-size: 14px;
-    }
-
-    .footer p {
-      font-size: 14px;
-    }
-
-    .individual-blog p  {
-     
-      font-size: 16px;
-    }
-
-    label {
-      font-size: 14px;
-    }
-
-    a {
-      font-size: 14px;
-    }
-  
-     h1 {
-      font-size: 18px;
-    }
-
-    h2 {
-      font-size: 16px;
-    }
-
-    h3 {
-      font-size: 16px;
-    }
-
-    .user-blog-card {
-      width: 550px;
-    }
-
-    .hero {
-      max-width: 800px;
-      min-width: 600px;
-      flex-direction: row;
-      justify-content: center;
-      
-    }
-
-    .hero-left {
-      width: 250px;
-    }
-
-    .hero-right {
-      width: 250px;
-    }
-
-    .blog-content textarea {
-      width: 600px;
-    }
-
-    .footer-text {
-      flex-direction: row;
-    }
-  
-  }
-  
-  @media only screen and (min-width: 768px) {
-    
-    .hero {
-      max-width: 1000px;
-      min-width: 800px;
-      justify-content: center;
-      flex-direction: row;
-    }
-
-    .hero-left {
-      width: 300px;
-    }
-
-    .hero-right {
-      width: 300px;
-    }
-  
-    h1 {
-      font-size: 20px;
-    }
-
-    h2 {
-      font-size: 18px;
-    }
-
-    h3 {
-      font-size: 19px;
-    }
-
-    a {
-      font-size: 16px;
-    }
-  
-    .hero p, .bottom-section p {
-      width: 250px;
-      font-size: 16px;
-    }
-
-    .footer p {
-      font-size: 14px;
-    }
-
-    .individual-blog p  {
-     
-      font-size: 16px;
-    }
-
-    label {
-      font-size: 16px;
-    }
-
-    .user-blog-card {
-      width: 700px;
-    }
-
-    .footer-text {
-      flex-direction: row;
-    }
-  }
-  
-  @media only screen and (min-width: 992px) {
-   
-    .hero {
-      max-width: 1200px;
-      min-width: 1000px;
-      justify-content: center;
-      flex-direction: row;
-    }
-
-    .hero-left {
-      width: 400px;
-    }
-
-    .hero-right {
-      width: 400px;
-    }
-  
-    h1 {
       font-size: 25px;
     }
 
@@ -472,103 +195,34 @@ input {
       font-size: 22px;
     }
 
-
-    h3 {
-      font-size: 23px;
-    }
-
-    a {
-      font-size: 16px;
-    }
-  
-    .hero p, .bottom-section p {
-      width: 300px;
-      font-size: 16px;
-    }
-
-    .footer p {
-      font-size: 16px;
-    }
-
     .footer-text {
-      flex-direction: row;
+      flex-direction: column;
+      align-content: center;
     }
-
-    .individual-blog p  {
-     
-      font-size: 16px;
-    }
-
-    label {
-      font-size: 16px;
-    }
-
-    .user-blog-card {
-      width: 900px;
-    }
-
-    .blog-content textarea {
-      width: 800px;
-    }
+    .footer-text p {
+      margin-left: 0px;
   }
+
   
-  @media only screen and (min-width: 1200px) {
+  }
 
-    .hero {
-      justify-content: space-between;
-    }
+  @media screen and (max-width: 480px) {
 
-    .hero-left {
-      width: 500px;
+    .hero h1 {
+      width: 400px;
     }
-
-    .hero-right {
-      width: 500px;
-    }
-  
+    
     h1 {
-      font-size: 30px;
+      font-size: 22px;
     }
 
     h2 {
-      font-size: 26px;
+      font-size: 18px;
     }
 
-    h3 {
-      font-size: 25px;
-    }
-
-    a {
+    p {
       font-size: 16px;
     }
 
-     .hero p, .bottom-section p {
-      width: 350px;
-      font-size: 16px;
-    }
-
-    .footer p {
-      font-size: 16px;
-    }
-
-    .footer-text {
-      flex-direction: row;
-    }
-
-    .individual-blog p  {
-     
-      font-size: 16px;
-    }
-
-    label {
-      font-size: 16px;
-    }
-
-    .user-blog-card {
-      width: 1100px;
-    }
-
-    .blog-content textarea {
-      width: 882px;
-    }
   }
+

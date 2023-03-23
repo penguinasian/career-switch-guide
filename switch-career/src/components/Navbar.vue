@@ -70,7 +70,7 @@ export default {
   margin: auto;
   padding: 10px;
   top: 0;
- 
+  
 }
 
 
@@ -112,6 +112,10 @@ export default {
 
 
 @media screen and (max-width: 480px) {
+
+  .nav-bar {
+    width: 420px;
+  }
  
   .material-symbols-outlined {
     display: block;
