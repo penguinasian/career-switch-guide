@@ -20,9 +20,7 @@ export default {
   name: "UserBlogCard",
   props: ["userBlog", "edit"],
   setup(props) {
-    const imageUrl = ref(require("../assets/profile.jpg"));
-
-    return { imageUrl };
+   
   },
 };
 </script>

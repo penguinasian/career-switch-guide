@@ -25,11 +25,11 @@ export default {
   components: { Navbar, Footer },
 
   setup() {
+    
     const userEmail = localStorage.getItem("email");
-    const { requireAuth, isLoggedIn } = useRequireAuth(userEmail);
+    const { isLoggedIn } = useRequireAuth(userEmail);
 
-    requireAuth(userEmail);
-
+  
     return { isLoggedIn };
   },
 };
