@@ -20,17 +20,27 @@
   </div>
 
   <div class="menu-bar" v-if="showMenu">
+    
+      <p @click="closeMenu">X</p>
+   
+    
     <router-link to="/"><span>Home</span></router-link>
+    <hr>
     <router-link to="/about"><span>About</span></router-link>
+    
+    <hr>
     <router-link to="/login" v-if="!isLoggedIn"
       ><span class="login-link">Log in</span></router-link
     >
+   
     <router-link to="/profile" v-if="isLoggedIn"
       ><span @click="viewProfile">Profile</span></router-link
     >
+   <hr>
     <router-link to="/login" v-if="isLoggedIn"
       ><span class="login-link" @click="logOut">Log out</span></router-link
     >
+    
   </div>
 </template>
 
@@ -55,9 +65,13 @@ export default {
       logOutUser(email, props.isLoggedIn);
     };
 
+    const closeMenu = () => {
+      showMenu.value = false
+    }
+
     const viewProfile = () => {};
 
-    return { toggle, logOut, email, viewProfile, showMenu };
+    return { toggle, logOut, email, viewProfile, showMenu, closeMenu };
   },
 };
 </script>
@@ -70,9 +84,11 @@ export default {
   margin: auto;
   padding: 10px;
   top: 0;
-  
 }
 
+.nav-bar h3 {
+  margin-left: 50px;
+}
 
 .nav-links {
   display: flex;
@@ -92,30 +108,43 @@ export default {
 
 .menu-bar {
   display: none;
+  
 }
 
- .material-symbols-outlined {
-    display: none;
-  }
-
+.material-symbols-outlined {
+  display: none;
+  margin-right: 20px;
+}
 
 /* media queries */
 
 @media screen and (max-width: 600px) {
+  .nav-bar h3 {
+    margin-left: 20px;
+  }
 
-  .nav-links span  {
+  .nav-links span {
     margin-right: 20px;
   }
-  
 }
 
+@media screen and (max-width: 520px) {
+
+
+  .nav-bar h3 {
+    margin-left: 20px;
+  }
+
+  .nav-links span {
+    margin-right: 20px;
+  }
+}
 
 @media screen and (max-width: 480px) {
 
-  .nav-bar {
-    width: 400px;
+  hr {
+    width: 85%;
   }
- 
   .material-symbols-outlined {
     display: block;
   }
@@ -124,16 +153,53 @@ export default {
     display: none;
   }
 
-   .menu-bar {
+
+  .menu-bar {
+    
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    align-items: flex-start;
+    gap: 30px;
     z-index: 10;
-    float: right;
-    background: rgba(0, 0, 0, 0.08);
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: #439aa7;
+    opacity: 0.98;
     padding: 10px;
     border-radius: 5px;
+    width: 100%;
+    height: 100%;
+  }
+
+  .menu-bar a {
+    margin-top: 20px;
+    margin-left: 30px;
+    font-weight: bold;
+  }
+
+
+
+  .menu-bar p {
+    width: 85%;
+    text-align: right;
+    font-size: 26px;
+  }
+
+  .menu-bar p:hover {
+    cursor: pointer;
+  }
+
+  .menu-bar span {
+    font-size: 20px;
+  }
+  
+  .menu-bar a:nth-child(1) {
+    padding-top: 50px;
+  }
+  
+  .home {
+    display: none;
   }
 }
-
 </style>

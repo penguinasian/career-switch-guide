@@ -54,4 +54,8 @@ export default {
 .svg-inline--fa{
     margin-left: 20px;
 }
+
+/* Media Queries */
+
+
 </style>

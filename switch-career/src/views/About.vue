@@ -19,6 +19,7 @@
 import useRequireAuth from "@/composables/useRequireAuth";
 import Navbar from "../components/Navbar.vue";
 import Footer from "../components/Footer.vue";
+import { ref } from "vue";
 
 export default {
   name: "About",
@@ -26,9 +27,8 @@ export default {
 
   setup() {
     
-    const userEmail = localStorage.getItem("email");
-    const { isLoggedIn } = useRequireAuth(userEmail);
-
+    const isLoggedIn = ref(true)
+    
   
     return { isLoggedIn };
   },
@@ -40,6 +40,7 @@ export default {
   
   margin: auto;
   margin-top: 100px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -52,12 +53,7 @@ export default {
   text-align: start;
 }
 
-.footer {
-  bottom: 0;
-  position: absolute;
-  padding: 10px;
-  margin-bottom: 100px;
-}
+
 
 /* media queries  */
 
@@ -82,10 +78,26 @@ export default {
   }
 }
 
+@media screen and (max-width: 600px) {
+
+  h1 {
+    width: 300px;
+    text-align: start;
+  }
+  
+  .about {
+    width: 500px
+  }
+}
+
 @media screen and (max-width: 480px) {
   
   .about {
-    width: 450px
+    width: 420px;
+  }
+
+  .about h1 {
+    text-align: center;
   }
 
   .about p {
@@ -93,16 +105,55 @@ export default {
   }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 440px) {
   
   .about {
-    width: 450px;
-    align-items: flex-start;
-    
+    width: 400px;
+  }
+
+  .about h1 {
+    text-align: center;
   }
 
   .about p {
     width: 300px
+  }
+}
+
+@media screen and (max-width: 400px) {
+  
+  .about {
+    width: 350px;
+  }
+
+  .about h1 {
+    text-align: center;
+  }
+
+  .about p {
+    width: 300px
+  }
+}
+
+@media screen and (max-width: 375px) {
+
+  .body {
+    width: 375px;
+    margin: auto;
+  }
+  
+  .about {
+    width: 350px;
+    
+  }
+
+  .about h1 {
+    text-align: center;
+  }
+
+  .about p {
+    width: 300px;
+    text-align: center;
   }
 }
 

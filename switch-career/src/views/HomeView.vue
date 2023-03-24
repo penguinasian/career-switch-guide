@@ -308,9 +308,17 @@ form {
     width: 160px;
     height: 280px;
   }
+
+  .website-guide-section {
+    flex-direction: column;
+  }
 }
 
 @media screen and (max-width: 480px) {
+
+  .home {
+    width: 350px;
+  }
 
   .hero {
    
@@ -334,6 +342,15 @@ form {
   .website-guide-section {
     flex-direction: column;
   }
+}
+
+@media screen and (max-width: 375px) {
+
+  .home {
+    width: 350px;
+  }
+
+
 }
 
 
