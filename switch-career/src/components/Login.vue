@@ -11,44 +11,40 @@
         <label>Password</label>
         <input type="password" v-model="password" required />
       </div>
-     
-        <p class="error" v-if="error">{{ error }} </p>
-     
-        
-     
+
+      <p class="error" v-if="error">{{ error }}</p>
+
       <div style="display: flex; align-items: center; flex-direction: column">
         <!-- <p v-if="errorMessage.length > 0" class="error"> {{ errorMessage }}</p> -->
-        <p>Not a member yet? <router-link to='/signup'>Sign up</router-link></p>
+        <p>Not a member yet? <router-link to="/signup">Sign up</router-link></p>
         <button class="btn-primary">Log in</button>
       </div>
       <div class="line">or</div>
       <button class="btn-primary" @click="loginUser">Log in with Google</button>
-      
     </form>
   </div>
 </template>
 
 <script>
 import { ref } from "vue";
-import { useRouter, useRoute } from 'vue-router';
+import { useRouter, useRoute } from "vue-router";
 
 export default {
   name: "Login",
   emits: ["switchLoginModal", "userLogin"],
   setup(props, ctx) {
-
-    const email = ref('')
-    const password = ref('')
-    const error = ref(null)
-    const router = useRouter()
+    const email = ref("");
+    const password = ref("");
+    const error = ref(null);
+    const router = useRouter();
 
     const toggleLoginModal = () => {
       ctx.emit("switchLoginModal");
     };
 
     const loginUser = () => {
-      ctx.emit("userLogin")
-    }
+      ctx.emit("userLogin");
+    };
 
     const handleSubmit = async () => {
       console.log(email.value, password.value);
@@ -69,24 +65,30 @@ export default {
           }
         );
         const loginResponse = await response.json();
-        console.log(response.ok)
+        console.log(response.ok);
         if (!response.ok) {
-            throw Error(loginResponse.message)
+          throw Error(loginResponse.message);
         }
-        error.value = null
-        localStorage.setItem('jwttoken', loginResponse.jwttoken)
-        localStorage.setItem('email', loginResponse.email)
-        router.push({name: 'blogs'})
-        
+        error.value = null;
+        localStorage.setItem("jwttoken", loginResponse.jwttoken);
+        localStorage.setItem("email", loginResponse.email);
+        router.push({ name: "blogs" });
       } catch (err) {
-        error.value = err.message
+        error.value = err.message;
         console.error(err.message);
       } finally {
         // error.value = null
       }
     };
 
-    return { toggleLoginModal, handleSubmit, email, password, error, loginUser };
+    return {
+      toggleLoginModal,
+      handleSubmit,
+      email,
+      password,
+      error,
+      loginUser,
+    };
   },
 };
 </script>
@@ -96,7 +98,6 @@ h1 {
   margin-top: 100px;
 }
 form {
-  
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -106,7 +107,7 @@ form {
   padding: 30px;
   margin-top: 100px;
   border-radius: 10px;
-  box-shadow: 5px 10px 12px #acabab;
+ 
 }
 
 .input-field {
@@ -143,5 +144,33 @@ a {
 
 a:hover {
   cursor: pointer;
+}
+
+/* Media Queries */
+
+@media screen and (max-width: 480px) {
+  .line::before,
+  .line::after {
+    
+    width: 100px;
+  
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .line::before,
+  .line::after {
+    
+    width: 80px;
+  
+  }
+
+   form {
+    margin-top: 30px;
+  }
+
+  h1 {
+    margin-top: 70px;
+  }
 }
 </style>

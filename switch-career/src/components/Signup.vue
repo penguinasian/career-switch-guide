@@ -14,7 +14,7 @@
       <div class="input-field">
         <label>Password</label>
         <input type="password" v-model="password" required />
-        <p v-if="err" class="error">{{err}}</p>
+        <p v-if="err" class="error">{{ err }}</p>
       </div>
       <div style="display: flex; align-items: center; flex-direction: column">
         <!-- <p v-if="errorMessage.length > 0" class="error"> {{ errorMessage }}</p> -->
@@ -39,7 +39,7 @@ export default {
     const email = ref("");
     const password = ref("");
     const router = useRouter();
-    const err = ref("")
+    const err = ref("");
 
     const toggleSignUpModal = () => {
       console.log("Log in clicked");
@@ -65,24 +65,24 @@ export default {
             body: JSON.stringify(userData),
           }
         );
-        
+
         const signupResponse = await response.json();
         if (!response.ok) {
-          throw Error(signupResponse.message)
+          throw Error(signupResponse.message);
         }
-        
+
         localStorage.setItem("jwttoken", signupResponse.jwttoken);
         localStorage.setItem("email", signupResponse.email);
         router.push({ name: "blogs" });
 
         localStorage.setItem("jwttoken", signupResponse.jwttoken);
       } catch (error) {
-        err.value = error.message
+        err.value = error.message;
         console.error(error.message);
       }
     };
 
-    return { name, email, password, toggleSignUpModal, handleSubmit, err};
+    return { name, email, password, toggleSignUpModal, handleSubmit, err };
   },
 };
 </script>
@@ -102,7 +102,7 @@ form {
   padding: 30px;
   margin-top: 100px;
   border-radius: 10px;
-  box-shadow: 5px 10px 12px #acabab;
+ 
 }
 
 .input-field {
@@ -144,5 +144,33 @@ a {
 
 a:hover {
   cursor: pointer;
+}
+
+/* Media Queries */
+
+@media screen and (max-width: 480px) {
+  .line::before,
+  .line::after {
+    width: 100px;
+  }
+
+  form {
+    margin-top: 50px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .line::before,
+  .line::after {
+    width: 80px;
+  }
+
+  form {
+    margin-top: 30px;
+  }
+
+  h1 {
+    margin-top: 50px;
+  }
 }
 </style>

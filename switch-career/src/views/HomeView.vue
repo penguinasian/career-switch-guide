@@ -18,12 +18,10 @@
         <router-link :to="{ name: 'blogs' }" v-if="userEmail"
           ><button class="btn-primary">Read stories</button></router-link
         >
-        
       </div>
       <div class="hero-right">
         <img :src="imgUrl" />
       </div>
-    
     </div>
 
     <div v-if="logInClicked" class="loginModal">
@@ -150,7 +148,7 @@ export default {
   margin: auto;
   margin-top: 50px;
   margin-bottom: 70px;
-  padding: 50px;
+  padding: 20px;
 }
 
 img {
@@ -160,7 +158,6 @@ img {
   filter: drop-shadow(35px 19px 24px rgba(0, 0, 0, 0.68));
   opacity: 0.75;
 }
-
 
 span:hover {
   cursor: pointer;
@@ -237,7 +234,6 @@ form {
 /* media queries */
 
 @media screen and (max-width: 1200px) {
-  
   .hero {
     max-width: 1200px;
     width: 1000px;
@@ -245,7 +241,6 @@ form {
 }
 
 @media screen and (max-width: 1024px) {
-  
   .hero {
     max-width: 1000px;
     width: 800px;
@@ -253,7 +248,6 @@ form {
 }
 
 @media screen and (max-width: 820px) {
-  
   .hero {
     max-width: 800px;
     width: 600px;
@@ -263,12 +257,9 @@ form {
     width: 220px;
     height: 320px;
   }
-
 }
 
 @media screen and (max-width: 620px) {
-
-  
   .hero {
     max-width: 700px;
     width: 500px;
@@ -289,10 +280,7 @@ form {
 }
 
 @media screen and (max-width: 550px) {
-
- 
   .hero {
-    
     width: 450px;
   }
 
@@ -315,13 +303,11 @@ form {
 }
 
 @media screen and (max-width: 480px) {
-
   .home {
     width: 350px;
   }
 
   .hero {
-   
     width: 350px;
     margin-bottom: 35px;
   }
@@ -345,13 +331,35 @@ form {
 }
 
 @media screen and (max-width: 375px) {
-
-  .home {
-    width: 350px;
+  .home h1 {
+    width: 200px;
   }
 
+  .home {
+    width: 300px;
+  }
 
+  .hero {
+    width: 300px;
+    margin-bottom: 35px;
+  }
+
+  .hero-left {
+    width: 120px;
+  }
+
+  .hero-right {
+    width: 120px;
+  }
+
+  img {
+    width: 130px;
+    height: 220px;
+  }
+
+  .website-guide-section {
+    width: 300px;
+    flex-direction: column;
+  }
 }
-
-
 </style>
