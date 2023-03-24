@@ -3,9 +3,7 @@
 
   <div class="hero">
     <h2>Hi, {{ userName }}</h2>
-    <p>
-      Thanks for stopping by to share your valuble experience.
-    </p>
+    <p>Thanks for stopping by to share your valuble experience.</p>
   </div>
 
   <form class="blog-form" @submit.prevent="handleSubmit">
@@ -16,7 +14,9 @@
         </div>
 
         <select v-model="curIndustry">
-          <option value="software engineering" selected>Software engineering</option>
+          <option value="software engineering" selected>
+            Software engineering
+          </option>
           <option value="accounting">Accounting</option>
           <option value="nursing">Nursing</option>
           <option value="banking">Banking</option>
@@ -32,7 +32,9 @@
         </div>
 
         <select v-model="preIndustry">
-          <option value="software engineering" selected>Software engineering</option>
+          <option value="software engineering" selected>
+            Software engineering
+          </option>
           <option value="accounting">Accounting</option>
           <option value="nursing">Nursing</option>
           <option value="banking">Banking</option>
@@ -45,7 +47,7 @@
       <div class="individual-question">
         <div class="question-title" style="padding: 30px">
           <label>Your story/experience goes here </label>
-          <span @click="toggleHelpModal">Help</span>
+          <span class="material-symbols-outlined" @click="toggleHelpModal"> help </span>
         </div>
         <textarea
           cols="100"
@@ -84,8 +86,8 @@ export default {
     const preIndustry = ref("software engineering");
     const blog = ref("");
     const showHelpModal = ref(false);
-    const isSharing = ref(false)
-    const router = useRouter()
+    const isSharing = ref(false);
+    const router = useRouter();
 
     const userEmail = localStorage.getItem("email");
     const jwttoken = localStorage.getItem("jwttoken");
@@ -94,13 +96,16 @@ export default {
 
     requireAuth(userEmail);
 
+    console.log(showHelpModal.value);
+
     const toggleHelpModal = () => {
       showHelpModal.value = !showHelpModal.value;
+      console.log("Show help modal: ", showHelpModal.value);
     };
 
     const closeShowHelpModal = () => {
-      showHelpModal.value = !showHelpModal.value
-    }
+      showHelpModal.value = !showHelpModal.value;
+    };
 
     const handleSubmit = async () => {
       const blogData = {
@@ -108,11 +113,11 @@ export default {
         preIndustry: preIndustry.value,
         blog: blog.value,
         user: userName.value,
-        userEmail: userEmail
+        userEmail: userEmail,
       };
 
       try {
-        isSharing.value = true
+        isSharing.value = true;
         const response = await fetch("http://localhost:3000/api/v1/blog/post", {
           method: "POST",
           headers: {
@@ -124,8 +129,8 @@ export default {
 
         const data = await response.json();
         console.log(data);
-        isSharing.value = false
-        router.push({name: "blogs"})
+        isSharing.value = false;
+        router.push({ name: "blogs" });
       } catch (error) {
         console.error(error.message);
       }
@@ -142,7 +147,7 @@ export default {
       toggleHelpModal,
       showHelpModal,
       closeShowHelpModal,
-      isSharing
+      isSharing,
     };
   },
 };
@@ -157,17 +162,12 @@ export default {
 }
 .blog-form {
   max-width: 1200px;
-  /* background: rgba(0, 0, 0, 0.05); */
-  /* box-shadow: 5px 10px 12px #acabab; */
-
   margin: auto;
-  /* margin-top: 150px; */
   margin-bottom: 70px;
   border-radius: 6px;
   padding: 20px;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
 }
 
@@ -188,6 +188,7 @@ input:focus {
 }
 
 .edu-exp {
+  margin: auto;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -220,7 +221,6 @@ input:focus {
 }
 
 .btn-primary {
-  
   width: 100px;
 }
 
@@ -231,8 +231,6 @@ input:focus {
   gap: 5px;
   margin-bottom: 50px;
   background: #4e6e81;
-  /* background: rgba(0, 0, 0, 0.05); */
-  box-shadow: 5px 10px 12px #acabab;
   border-radius: 8px;
 }
 
@@ -243,16 +241,11 @@ input:focus {
   width: 822px;
 }
 
-/* .individual-question label {
-  padding: 30px;
-} */
-
 .individual-question span:hover {
   cursor: pointer;
 }
 
 textarea {
-  /* border-radius: 10px; */
   border: none;
   background: lightgray;
   width: 882px;
@@ -264,8 +257,179 @@ select {
 }
 
 .modal-container {
-    height: 450px;
+  height: 450px;
+}
+
+/* Media Queries */
+
+@media screen and (max-width: 1200px) {
+  .hero {
+    width: 900px;
   }
 
+  .blog-form {
+    width: 1000px;
+  }
+}
 
+@media screen and (max-width: 1024px) {
+  .hero {
+    width: 600px;
+  }
+
+  .blog-form {
+    width: 800px;
+  }
+
+  .individual-question,
+  select, textarea {
+    width: 800px;
+  }
+
+  .question-title {
+    width: 740px;
+  }
+
+  textarea {
+    padding: 0px;
+  }
+
+ 
+}
+
+@media screen and (max-width: 900px) {
+  .individual-question,
+  select, textarea {
+    width: 600px;
+  }
+
+  textarea {
+    padding: 0px;
+  }
+
+  .question-title {
+    width: 540px;
+  }
+
+  .hero {
+    width: 600px;
+  }
+
+  .blog-form {
+    width: 800px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .individual-question,
+  select, textarea {
+    width: 500px;
+  }
+
+  textarea {
+    padding: 0px;
+  }
+
+  .question-title {
+    width: 440px;
+  }
+
+  .hero {
+    width: 600px;
+  }
+
+  .blog-form {
+    width: 500px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .individual-question,
+  select, textarea {
+    width: 350px;
+  }
+
+  textarea {
+    padding: 0px;
+  }
+
+  .question-title {
+    width: 290px
+  }
+
+  .hero {
+    width: 500px;
+  }
+
+  .blog-form {
+    width: 450px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .individual-question,
+  .question-title,
+  select, textarea {
+    width: 250px;
+  }
+
+  textarea {
+    padding: 0px;
+  }
+
+  .question-title {
+    width: 190px;
+  }
+
+  .edu-exp :nth-child(3) .question-title {
+    flex-direction: column;
+    padding-left: 0px;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  span {
+    float: right;
+  }
+
+  label {
+    width: 200px;
+  }
+
+  .hero {
+    width: 300px;
+  }
+
+  .blog-form {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .individual-question,
+  .question-title,
+  select, textarea {
+    width: 220px;
+  }
+
+  textarea {
+    padding: 0px;
+  }
+
+  .question-title {
+    width: 160px;
+  }
+
+  label {
+    width: 160px;
+  }
+
+  .hero {
+    width: 250px;
+  }
+
+  .blog-form {
+    width: 250px;
+  }
+}
 </style>
