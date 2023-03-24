@@ -76,7 +76,6 @@ export default {
 
 .nav-links {
   display: flex;
-  /* margin-right: 30px; */
 }
 
 .nav-links span {
@@ -114,7 +113,7 @@ export default {
 @media screen and (max-width: 480px) {
 
   .nav-bar {
-    width: 420px;
+    width: 400px;
   }
  
   .material-symbols-outlined {

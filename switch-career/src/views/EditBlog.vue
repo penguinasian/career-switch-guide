@@ -84,7 +84,7 @@ textarea {
   width: 882px;
   height: 600px;
   border-radius: 6px;
-  box-shadow: 5px 10px 12px #acabab;
+  
 }
 
 .blog-content {
@@ -92,5 +92,56 @@ textarea {
   flex-direction: column;
 }
 
+/* Media Queries */
+
+@media screen and (max-width: 1024px) {
+  
+  textarea {
+
+  width: 650px;
+  
+}
+
+}
+
+@media screen and (max-width: 768px) {
+  
+  textarea {
+
+  width: 550px;
+ 
+}
+
+}
+
+@media screen and (max-width: 600px) {
+  
+  textarea {
+
+  width: 500px;
+ 
+}
+
+}
+
+@media screen and (max-width: 550px) {
+  
+  textarea {
+
+  width: 400px;
+ 
+}
+
+}
+
+@media screen and (max-width: 391px) {
+  
+  textarea {
+
+  width: 300px;
+ 
+}
+
+}
 
 </style>

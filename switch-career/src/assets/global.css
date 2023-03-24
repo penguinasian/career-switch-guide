@@ -204,6 +204,10 @@ form {
 
 @media screen and (max-width: 540px) {
 
+  span {
+    font-size: 15px;
+  }
+
   .hero h1 {
     width: 500px;
   }
@@ -234,6 +238,8 @@ form {
 }
 
 @media screen and (max-width: 480px) {
+
+  
 
   .hero h1 {
     width: 400px;
