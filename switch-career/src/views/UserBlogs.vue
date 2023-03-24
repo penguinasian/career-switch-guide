@@ -13,28 +13,9 @@
         ><button class="btn-primary">Create</button></router-link
       >
     </div>
-    <div class="hero-right">
+    
       <form>
-        <!-- <div>
-          <label>Current Industry: </label>
-          <select v-model="curIndustry">
-            <option value="all" selected>
-              All
-            </option>
-            <option value="software engineering">
-              Software engineering
-            </option>
-            <option value="accounting">Accounting</option>
-            <option value="nursing">Nursing</option>
-            <option value="banking">Banking</option>
-            <option value="finance">Finance</option>
-            <option value="sales">Sales</option>
-            <option value="marketing">Marketing</option>
-            <option value="cook">Cook</option>
-          </select>
-        </div> -->
-
-        <div>
+        
           <label>Filter by your desired industry: </label>
           <select v-model="desiredIndustry">
             <option value="all" selected>
@@ -51,9 +32,9 @@
             <option value="marketing">Marketing</option>
             <option value="cook">Cook</option>
           </select>
-        </div>
+        
       </form>
-    </div>
+    
   </div>
   <div class="user-stories">
     <div v-if="filteredBlogs.length > 0" class="user-stories">
@@ -132,15 +113,6 @@ export default {
          return userBlogs.value.filter((userBlog) => userBlog.curIndustry === desiredIndustry.value)
     })
 
-    // const handleFilter = () => {
-      
-     
-
-    //      return userBlogs.value.filter((userBlog) => userBlog.curIndustry === newIndustry.value && userBlog.preIndustry === curIndustry.value)
-     
-
-     
-    // }
 
     return { userBlogs, error, usertoken, isLoggedIn, requireAuth, userName, desiredIndustry, curIndustry, filteredBlogs };
   },
@@ -150,11 +122,10 @@ export default {
 <style scoped>
 
 
-/* .user-story:nth-child(even) > .user-story-card {
-  flex-direction: row-reverse !important;
-  justify-content: flex;
-  margin-left: 150px;
-} */
+.hero {
+  margin-top: 50px;
+  margin-bottom: 25px;
+}
 
 .hero-left {
   align-items: center;
@@ -164,5 +135,116 @@ export default {
   text-align: start;
 }
 
+form {
+  display: flex;
+  justify-content: center;
+}
 
+/* media queries */
+
+@media screen and (max-width: 1200px) {
+  
+  .hero {
+    
+    width: 1000px;
+  }
+
+  form {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  
+  .hero {
+ 
+    width: 800px;
+  }
+
+  .hero-left {
+    width: 400px;
+  }
+}
+
+@media screen and (max-width: 820px) {
+  
+  .hero {
+    max-width: 800px;
+    width: 600px;
+  }
+
+  form {
+    flex-direction: column;
+  }
+
+}
+
+@media screen and (max-width: 620px) {
+
+  
+  .hero {
+    max-width: 700px;
+    width: 500px;
+  }
+
+  .hero-right {
+    width: 200px;
+  }
+
+  .hero-left {
+    width: 220px;
+  }
+
+  form {
+    flex-direction: column;
+  }
+
+}
+
+@media screen and (max-width: 550px) {
+
+ 
+  .hero {
+    
+    width: 450px;
+  }
+
+  .hero-right {
+    width: 180px;
+  }
+
+  .hero-left {
+    width: 180px;
+  }
+
+  form {
+    flex-direction: column;
+  }
+
+}
+
+@media screen and (max-width: 480px) {
+
+  .hero {
+   
+    width: 350px;
+    flex-direction: column;
+
+  }
+
+  .hero-left {
+    width: 280px;
+  }
+
+  .hero-right {
+    width: 130px;
+  }
+
+  form {
+    flex-direction: column;
+  }
+
+ 
+}
 </style>

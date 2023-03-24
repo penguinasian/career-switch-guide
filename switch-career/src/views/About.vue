@@ -37,13 +37,14 @@ export default {
 
 <style scoped>
 .about {
-  max-width: 1200px;
+  
   margin: auto;
   margin-top: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  padding: 10px;
 }
 
 .about p {
@@ -54,59 +55,55 @@ export default {
 .footer {
   bottom: 0;
   position: absolute;
-  margin-bottom: 50px;
+  padding: 10px;
+  margin-bottom: 100px;
 }
 
-@media only screen and (max-width: 480px) {
+/* media queries  */
+
+@media screen and (max-width: 1024px) {
+  
   .about {
-    max-width: 800px;
-    min-width: 500px;
+    width: 800px
+  }
+}
+
+@media screen and (max-width: 820px) {
+  
+  .about {
+    width: 800px
+  }
+}
+
+@media screen and (max-width: 768px) {
+  
+  .about {
+    width: 600px
+  }
+}
+
+@media screen and (max-width: 480px) {
+  
+  .about {
+    width: 450px
   }
 
   .about p {
-    width: 200px;
+    width: 300px
   }
 }
 
-@media only screen and (min-width: 480px) {
+@media screen and (max-width: 480px) {
+  
   .about {
-    max-width: 800px;
-    min-width: 600px;
-  }
-}
-
-@media only screen and (max-width: 576px) {
-  .about {
-    max-width: 800px;
-    min-width: 650x;
-  }
-}
-
-@media only screen and (min-width: 576px) {
-  .about {
+    width: 450px;
+    align-items: flex-start;
     
-    min-width: 1000px;
+  }
+
+  .about p {
+    width: 300px
   }
 }
 
-@media only screen and (min-width: 768px) {
-  .about {
-    max-width: 1000px;
-    min-width: 800px;
-  }
-}
-
-@media only screen and (min-width: 992px) {
-  .about {
-    max-width: 1200px;
-    min-width: 1000px;
-  }
-}
-
-@media only screen and (min-width: 1200px) {
-  .about {
-    max-width: 1500px;
-    min-width: 1300px;
-  }
-}
 </style>
